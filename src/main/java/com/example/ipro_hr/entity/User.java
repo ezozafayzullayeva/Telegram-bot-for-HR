@@ -22,50 +22,29 @@ public class User extends AbsUUID {
     @Column(nullable = false, name = "chat_id")
     private String chatId;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    //Kasb turi
-    private String profession;
+    private String profession;   //kasbi
 
-    //Darajasi
-//    @Enumerated(EnumType.STRING)
-//    private Level level;
-    private String level;
+    private String level;      //Darajasi
 
-    //qaysi viloyatdan
-//    @Column(name = "location")
 //    @Enumerated(EnumType.STRING)
 //    private Location location;
-    private String location;
+    private String location;  //manzili
 
-    // Portfolio silkasi
     @Column(name = "portfolio_link")
-    private String portfolioLink;
+    private String portfolioLink;   // Portfolio silkasi
 
-    //Oylik maosh
-//    @Enumerated(EnumType.STRING)
-//    private SalaryRange salary;
-    private String salary;
+    private String salary; //ish haqi
 
-    //BANDLIK TURI
-//    @Enumerated(EnumType.STRING)
-//    private EmploymentType employmentType ;
-    private String employmentType;
+    private String employmentType;      //ish turi(full time, online, part time)
 
-    private String resume;
-
-
-
-
-
-
-//BOT dan imegeni olib DATABASE ga hozircha saqlolmadim
-    /*@OneToOne(fetch = FetchType.LAZY)
-    private Image image;*/
-
-
+//    private String resume;
 }

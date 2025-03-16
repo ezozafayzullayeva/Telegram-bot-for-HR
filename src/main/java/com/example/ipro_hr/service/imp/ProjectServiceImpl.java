@@ -30,7 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
         }
         UserResDTO.UserResDTOBuilder userResDTO = UserResDTO.builder();
         userResDTO.id(user.getId());
-        userResDTO.fullName(user.getFullName());
+        userResDTO.firstName(user.getFirstName());
+        userResDTO.lastName(user.getLastName());
         userResDTO.phoneNumber(user.getPhoneNumber());
         userResDTO.profession(user.getProfession());
         userResDTO.location(String.valueOf(user.getLocation()));
@@ -38,7 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
         userResDTO.portfolioLink(user.getPortfolioLink());
         userResDTO.salary(user.getSalary());
         userResDTO.employmentType(user.getEmploymentType());
-        userResDTO.resume(user.getResume());
+//        userResDTO.resume(user.getResume());
         return userResDTO.build();
     }
 

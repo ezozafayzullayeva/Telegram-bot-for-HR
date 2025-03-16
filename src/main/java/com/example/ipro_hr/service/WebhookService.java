@@ -75,8 +75,11 @@ public class WebhookService {
             Long chatId = update.getMessage().getChatId();
 
             if (message.equals("/start")) whenStart(update);
-            else if (userService.getUserState(chatId).equals(BotState.FULL_NAME)) {
-                userService.userFullName(update);
+            else if (userService.getUserState(chatId).equals(BotState.FIRST_NAME)) {
+                userService.userFirstName(update);
+            }
+            else if (userService.getUserState(chatId).equals(BotState.LAST_NAME)) {
+                userService.userLastName(update);
             }
             else if (userService.getUserState(chatId).equals(BotState.PROFESSION)) {
                 userService.userProfession(update);

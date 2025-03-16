@@ -22,6 +22,6 @@ public class LongPollingService extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
- webhookService.getUpdate(update);
+        webhookService.getUpdate(update);
     }
 }

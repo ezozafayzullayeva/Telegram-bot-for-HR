@@ -11,11 +11,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResDTO {
     private UUID id;
 
-    private String fullName;
+    private String firstName;
+
+    private String lastName;
 
     private String phoneNumber;
 
@@ -31,6 +32,5 @@ public class UserResDTO {
 
     private String employmentType ;
 
-    private String resume;
-
+//    private String resume;
 }
