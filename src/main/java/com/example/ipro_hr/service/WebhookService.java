@@ -1,3 +1,4 @@
+
 package com.example.ipro_hr.service;
 
 import com.example.ipro_hr.constants.BotConstants;
@@ -84,9 +85,6 @@ public class WebhookService {
             else if (userService.getUserState(chatId).equals(BotState.PROFESSION)) {
                 userService.userProfession(update);
             }
-//            else if (userService.getUserState(chatId).equals(BotState.SEND_CV)) {
-//                userService.sendResume(update);
-//            }
             else if (userService.getUserState(chatId).equals(BotState.LOCATION)) {
                 userService.location(update);
             } else if (userService.getUserState(chatId).equals(BotState.LEVEL)) {
@@ -106,17 +104,15 @@ public class WebhookService {
 //                userService.sendUserDataToChannel(update, user);
             }
         }else if (update.hasCallbackQuery()) {
-                String data = update.getCallbackQuery().getData();
-                Long chatId = update.getCallbackQuery().getMessage().getChatId();
-//                chatId = update.getCallbackQuery().getMessage().getChatId();
-                if (getUserState(chatId).equals(BotState.REGISTRATION) && data.equals("Royxatdan_otish")) {
-                    userService.saveUser(update);
+            String data = update.getCallbackQuery().getData();
+            Long chatId = update.getCallbackQuery().getMessage().getChatId();
+            if (getUserState(chatId).equals(BotState.REGISTRATION) && data.equals("Royxatdan_otish")) {
+                userService.saveUser(update);
 
-                } else if (getUserState(chatId).equals(BotState.REGISTRATION) && data.equals("userReRegister")) {
-                    userService.userReRegister(update);
+            } else if (getUserState(chatId).equals(BotState.REGISTRATION) && data.equals("userReRegister")) {
+                userService.userReRegister(update);
 
-                }
             }
         }
     }
-
+}

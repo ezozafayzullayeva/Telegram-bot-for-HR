@@ -1,6 +1,5 @@
 package com.example.ipro_hr.service;
 
-
 import com.example.ipro_hr.constants.BotConstants;
 import com.example.ipro_hr.payload.BotState;
 import com.example.ipro_hr.repository.UserRepository;
@@ -16,7 +15,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +29,7 @@ public class UserService {
 
     private final RestTemplate restTemplate;
     private final Map<Long, BotState> userStates = new HashMap<>();
-    private final String channelId="-1002024429715";
+    private final String channelId="-1002692135666";
 
 
     public void setUserState(Long chatId, BotState state) {
@@ -84,23 +82,22 @@ public class UserService {
     private void me(Update update) {
         String chatId = getChatId(update);
         User user = userRepository.findByChatId(chatId);
-        String text = "*Sizning malumotlaringiz \n*" +
+        String text = "Sizning malumotlaringiz \n" +
                 "Ismingiz: " + user.getFirstName() +"\n"+
                 "Familiyangiz: " + user.getLastName() +"\n"+
                 "Kasbingiz:  *" + user.getProfession()  +"\n"+
                 "Darajangiz: " + user.getLevel() +"\n"+
-                "Maoshingiz : " + user.getSalary()+"*" +
+                "Maoshingiz : " + user.getSalary() +
                 "Portfolio linki: " + user.getPortfolioLink() +"\n"+
                 "Ish turi: " + user.getEmploymentType()+"\n"+
                 "Manzilingiz: " + user.getLocation() +"\n"+
-                "Telefon raqam: " + user.getPhoneNumber()+"*";
-//                "Rezume : " + user.getResume()+"*";
+                "Telefon raqam: " + user.getPhoneNumber();
 
         EditMessageText editMessageText = new EditMessageText();
         editMessageText.setChatId(chatId);
         editMessageText.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
         editMessageText.setReplyMarkup(forMe());
-        editMessageText.enableMarkdown(true);
+        editMessageText.enableMarkdown(false);
         editMessageText.setText(text);
 
         restTemplate.postForObject(BotConstants.EDIT_MESSAGE, editMessageText, Object.class);
@@ -174,17 +171,6 @@ public class UserService {
         setUserState(longChatId(update), BotState.LEVEL);
     }
 
-//    public void sendResume(Update update) {
-//        User user = userRepository.findByChatId(getChatId(update));
-//        String profession=update.getMessage().getText();
-//        user.setProfession(profession);
-//        userRepository.save(user);
-//        SendMessage sendMessage = new SendMessage(getChatId(update),
-//                "\uD83D\uDCF11-Rezumengizni yuboring: ");
-//        // sendMessage.setReplyMarkup(generateMarkup());
-//        restTemplate.postForObject(BotConstants.FOR_MESSAGE, sendMessage, Object.class);
-//        setUserState(longChatId(update), BotState.LOCATION);
-//    }
     public void userLevel(Update update) {
         User user = userRepository.findByChatId(getChatId(update));
 //        Location location= Location.valueOf(update.getMessage().getText()); //enum classdan foydalanganda
@@ -192,11 +178,9 @@ public class UserService {
         user.setProfession(profession);
         userRepository.save(user);
         SendMessage sendMessage = new SendMessage(getChatId(update), "Darajangizni kiriting" + "\n"+
-            "Masalan: Junior ");
-//                "Junior+ " + "\n"+
+                "Masalan: Junior ");
 //                "Middle " + "\n"+
-//                "Middle+ " + "\n"+
-//                "Senior : ");
+
         sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
         restTemplate.postForObject(BotConstants.FOR_MESSAGE, sendMessage, Object.class);
         setUserState(longChatId(update), BotState.LOCATION);
@@ -209,24 +193,13 @@ public class UserService {
         SendMessage sendMessage = new SendMessage(getChatId(update), "\uD83C\uDF0DManzilingizni kiriting:" + "\n"+
                 "Masalan: Toshkent shahri ");
 //                "1. Toshkent shahri" + "\n"+
-//                "2. Samarqand" + "\n"+
 //                "3. Qashqadaryo" + "\n"+
-//                "4. Surxondaryo" + "\n"+
-//                "5. Sirdaryo" + "\n"+
-//                "6. Jizzax" + "\n"+
 //                "7. Navoiy" + "\n"+
-//                "8. Buxoro" + "\n"+
-//                "9. Andijon" + "\n"+
-//                "10. Farg'ona" + "\n"+
-//                "11. Namangan" + "\n"+
-//                "12. Xiva" + "\n"+
-//                "13. Qoraqalpog'iston Respublikasi: ");
+
         sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
         restTemplate.postForObject(BotConstants.FOR_MESSAGE, sendMessage, Object.class);
         setUserState(longChatId(update), BotState.PORTFOLIO);
     }
-
-
 
     public void userPortfolio(Update update) {
         User user = userRepository.findByChatId(getChatId(update));
@@ -247,10 +220,6 @@ public class UserService {
         userRepository.save(user);
         SendMessage sendMessage = new SendMessage(getChatId(update), "\uD83D\uDCB5Qancha maosh olishni xohlaysiz?");
 //                "1-5 mln, " + "\n"+
-//                "5-10 mln, " +"\n"+
-//                "10-15 mln, " +"\n"+
-//                "15-20 mln, " +"\n"+
-//                "20 mln+: ");
         sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
         restTemplate.postForObject(BotConstants.FOR_MESSAGE, sendMessage, Object.class);
         setUserState(longChatId(update), BotState.EMPLOYMENT_TYPE);
@@ -367,7 +336,7 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       sendUserDataToChannel(update, user);
+        sendUserDataToChannel(update, user);
 
     }
     private void sendUserDataToChannel(Update update, User user) {
