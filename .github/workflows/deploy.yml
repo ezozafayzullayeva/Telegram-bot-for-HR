@@ -56,7 +56,55 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          key: -----BEGIN OPENSSH PRIVATE KEY-----
+            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
+            Eocv1lYJim63AAAACWNpLWNkLWtleQE=
+            -----END OPENSSH PRIVATE KEY-----
           source: "target/ipro_HR-0.0.1-SNAPSHOT.jar"
           target: "/home/ipro_HR/app"
 
